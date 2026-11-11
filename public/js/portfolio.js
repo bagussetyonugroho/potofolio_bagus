@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (roles.length > 0) {
             let roleIdx = 0;
-            let charIdx = 0;
-            let isDeleting = false;
+            let charIdx = roles[0].length;
+            let isDeleting = true;
 
             const typeLoop = () => {
                 const currentRole = roles[roleIdx];
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let speed = isDeleting ? 35 : 70;
 
                 if (!isDeleting && charIdx === currentRole.length) {
-                    speed = 2200; // Pause at full word
+                    speed = 2800; // Pause at full word
                     isDeleting = true;
                 } else if (isDeleting && charIdx === 0) {
                     isDeleting = false;
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(typeLoop, speed);
             };
 
-            setTimeout(typeLoop, 700);
+            setTimeout(typeLoop, 3500);
         }
     }
 

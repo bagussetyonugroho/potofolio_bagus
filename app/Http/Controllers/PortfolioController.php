@@ -27,11 +27,12 @@ class PortfolioController extends Controller
                 'semester' => 'Semester 5',
                 'hero_subtitle' => 'Informatics Student at Universitas Internasional Semen Indonesia (UISI).',
                 'typing_roles' => [
+                    'Happy coding!',
+                    'Bagus Setyo Nugroho',
                     'Informatics Student',
                     'Web Developer Enthusiast',
                     'Software Development Enthusiast',
                     'UI/UX Design Enthusiast',
-                    'Technology & Digital Innovation Enthusiast',
                 ],
                 'professional_identities' => [
                     'Informatics Student',
@@ -425,8 +426,8 @@ class PortfolioController extends Controller
                 ],
                 [
                     'name' => 'Instagram',
-                    'handle' => '@bagussetyo.n',
-                    'url' => 'https://instagram.com/bagussetyo.n',
+                    'handle' => '@stybagusn',
+                    'url' => 'https://www.instagram.com/stybagusn/',
                     'icon' => 'instagram',
                     'followers' => 'Daily & Tech Life',
                 ],
@@ -439,8 +440,8 @@ class PortfolioController extends Controller
                 ],
                 [
                     'name' => 'TikTok',
-                    'handle' => '@bagussetyo.dev',
-                    'url' => 'https://tiktok.com/@bagussetyo.dev',
+                    'handle' => '@stybagusn',
+                    'url' => 'https://www.tiktok.com/@stybagusn',
                     'icon' => 'tiktok',
                     'followers' => 'Coding & UI Insights',
                 ],

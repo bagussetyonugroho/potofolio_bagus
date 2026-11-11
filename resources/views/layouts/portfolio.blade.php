@@ -7,10 +7,10 @@
     <meta name="description" content="{{ $profile['name'] }} — {{ $profile['role_primary'] }}. {{ $profile['tagline'] }}">
     <title>{{ $profile['name'] }} — {{ $profile['role_primary'] }} | Personal Portfolio</title>
 
-    <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono -->
+    <!-- Google Fonts: Archivo Black, Syne, Space Grotesk, Plus Jakarta Sans, JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN (Instant Utility Engine) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,6 +34,9 @@
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- React Bits 3D Lanyard Bundle -->
+    @vite(['resources/js/app.js'])
 </head>
 <body class="bg-architectural-grid antialiased selection:bg-indigo-500 selection:text-white">
 
@@ -64,11 +67,7 @@
         </div>
     </div>
 
-    <!-- 2. CUSTOM MAGNETIC CURSOR -->
-    <div id="cursor-dot" class="cursor-dot"></div>
-    <div id="cursor-ring" class="cursor-ring"></div>
-
-    <!-- 3. SUBTLE AMBIENT BACKGROUND EFFECTS -->
+    <!-- 2. SUBTLE AMBIENT BACKGROUND EFFECTS -->
     <div class="ambient-orb-1"></div>
     <div class="ambient-orb-2"></div>
 
