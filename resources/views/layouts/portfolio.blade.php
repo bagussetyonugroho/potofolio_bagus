@@ -40,29 +40,38 @@
 </head>
 <body class="bg-architectural-grid antialiased selection:bg-indigo-500 selection:text-white">
 
-    <!-- 1. ARCHITECTURAL PAGE PRELOADER -->
+    <!-- 1. WELCOME SPLASH PRELOADER (ON REFRESH / ENTRY) -->
     <div id="page-preloader" aria-hidden="true">
-        <div class="flex items-center justify-between text-xs font-mono-tech text-zinc-400">
-            <div class="flex items-center gap-2.5">
-                <span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>
-                <span>PORTFOLIO.SYSTEM // INITIALIZING</span>
+        <div class="preloader-welcome-shell">
+            <!-- Top 3 Circular Icons -->
+            <div class="preloader-icons-row">
+                <div class="preloader-icon-circle" style="--delay: 0.1s">
+                    <i data-lucide="code-2" class="w-4 h-4"></i>
+                </div>
+                <div class="preloader-icon-circle" style="--delay: 0.24s">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                </div>
+                <div class="preloader-icon-circle" style="--delay: 0.38s">
+                    <i data-lucide="globe" class="w-4 h-4"></i>
+                </div>
             </div>
-            <span>{{ strtoupper($profile['initials']) }} — EDITION 2026</span>
-        </div>
 
-        <div class="max-w-xl">
-            <p class="font-mono-tech text-xs uppercase tracking-widest text-indigo-400 mb-2">Loading Executive Experience</p>
-            <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">{{ $profile['name'] }}</h2>
-            <p class="text-sm text-zinc-400 mt-2">{{ $profile['role_primary'] }}</p>
-        </div>
-
-        <div class="space-y-3">
-            <div class="flex items-baseline justify-between">
-                <span class="font-mono-tech text-xs text-zinc-500">ASSETS &amp; INTERACTIVE ENGINE</span>
-                <span id="preloader-count" class="font-display text-3xl sm:text-4xl font-bold text-white">00%</span>
+            <!-- Center Wide Extended Welcome Text -->
+            <div class="preloader-title-group">
+                <h1 class="preloader-title-line">
+                    <span class="preloader-word preloader-word-chromatic" style="--w-delay: 0.35s">Welcome</span>
+                    <span class="preloader-word" style="--w-delay: 0.48s">to</span>
+                    <span class="preloader-word" style="--w-delay: 0.58s">my</span>
+                </h1>
+                <h2 class="preloader-title-line mt-1.5 sm:mt-2">
+                    <span class="preloader-word" style="--w-delay: 0.72s">Portfolio</span>
+                    <span class="preloader-word" style="--w-delay: 0.86s">Website</span>
+                </h2>
             </div>
-            <div class="preloader-bar-track">
-                <div id="preloader-bar" class="preloader-bar-fill"></div>
+
+            <!-- Bottom Website URL Pill -->
+            <div class="preloader-url-pill" style="--pill-delay: 1.05s">
+                <span id="preloader-url-text">stybagus.devs.surf</span>
             </div>
         </div>
     </div>

@@ -12,38 +12,42 @@
             --bg: #09090B;
             --paper: #FFFFFF;
             --ink: #09090B;
-            --muted: #52525B;
-            --border: #E4E4E7;
-            --accent: #4F46E5;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #121215;
-            color: var(--ink);
+            background: #0B0B0E;
+            color: #FAFAFA;
             line-height: 1.55;
-            padding: 2.5rem 1rem;
+            padding: 2rem 1rem 3rem;
+            min-height: 100vh;
         }
         .toolbar {
-            max-width: 860px;
+            max-width: 780px;
             margin: 0 auto 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #18181B;
-            border: 1px solid #27272A;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            background: #141418;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             padding: 0.875rem 1.25rem;
-            border-radius: 12px;
+            border-radius: 14px;
             color: #FAFAFA;
         }
-        .toolbar-actions { display: flex; gap: 0.75rem; }
+        .toolbar-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             padding: 0.55rem 1.1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            border-radius: 9px;
+            font-size: 0.84rem;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
@@ -52,117 +56,38 @@
         }
         .btn-outline {
             background: transparent;
-            border-color: #3F3F46;
+            border-color: rgba(255, 255, 255, 0.18);
             color: #E4E4E7;
         }
-        .btn-outline:hover { background: #27272A; }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.08); }
         .btn-primary {
             background: #FAFAFA;
             color: #09090B;
         }
         .btn-primary:hover { background: #E4E4E7; }
-        .sheet {
-            max-width: 860px;
+        .cv-sheet {
+            max-width: 780px;
             margin: 0 auto;
             background: var(--paper);
-            padding: 3.25rem 3.5rem;
-            border-radius: 14px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 2px solid var(--ink);
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.75rem;
-            gap: 1.5rem;
-        }
-        .name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-        }
-        .role {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--accent);
-            font-weight: 600;
-            margin-top: 0.35rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .contact-meta {
-            text-align: right;
-            font-size: 0.82rem;
-            color: var(--muted);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .contact-meta div { margin-bottom: 0.2rem; }
-        .section { margin-bottom: 1.65rem; }
-        .section-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--ink);
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.4rem;
-            margin-bottom: 0.9rem;
-        }
-        .summary { font-size: 0.92rem; color: #27272A; }
-        .item { margin-bottom: 1rem; }
-        .item-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-        .item-sub {
-            font-size: 0.84rem;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-        .item-period {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.78rem;
-            color: var(--muted);
-        }
-        .item-desc { font-size: 0.87rem; color: #3F3F46; }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        .tag-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.35rem;
-            margin-top: 0.35rem;
-        }
-        .tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            padding: 0.15rem 0.5rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            background: #F4F4F5;
+        .cv-sheet img {
+            display: block;
+            width: 100%;
+            height: auto;
         }
         @media print {
             body { background: #FFF; padding: 0; }
             .toolbar { display: none !important; }
-            .sheet { box-shadow: none; padding: 1.5rem; max-width: 100%; }
-        }
-        @media (max-width: 640px) {
-            .sheet { padding: 1.75rem 1.25rem; }
-            .header { flex-direction: column; }
-            .contact-meta { text-align: left; }
-            .grid-2 { grid-template-columns: 1fr; }
+            .cv-sheet {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -170,181 +95,17 @@
     <div class="toolbar">
         <div>
             <strong style="font-family: 'Space Grotesk', sans-serif;">Bagus Setyo Nugroho</strong>
-            <span style="color: #A1A1AA; font-size: 0.85rem; margin-left: 0.5rem;">— Executive Curriculum Vitae</span>
+            <span style="color: #A1A1AA; font-size: 0.85rem; margin-left: 0.5rem;">— Curriculum Vitae</span>
         </div>
         <div class="toolbar-actions">
             <a href="/" class="btn btn-outline">← Kembali ke Portfolio</a>
+            <a href="/images/cv-bagus-setyo-nugroho.jpg" download="CV-Bagus-Setyo-Nugroho.jpg" class="btn btn-outline">Unduh Gambar CV</a>
             <button onclick="window.print()" class="btn btn-primary">Cetak / Simpan PDF</button>
         </div>
     </div>
 
-    <main class="sheet">
-        <header class="header">
-            <div>
-                <h1 class="name">Bagus Setyo Nugroho</h1>
-                <div class="role">Informatics Student | Aspiring Software Developer</div>
-            </div>
-            <div class="contact-meta">
-                <div>bagus.setyo.nugroho@student.uisi.ac.id</div>
-                <div>+62 812-3456-7890</div>
-                <div>Universitas Internasional Semen Indonesia (UISI)</div>
-                <div>Gresik / Surabaya, Jawa Timur, Indonesia</div>
-            </div>
-        </header>
-
-        <section class="section">
-            <h2 class="section-title">01 // Executive Summary</h2>
-            <p class="summary">Saya Bagus Setyo Nugroho, mahasiswa semester 5 Program Studi Informatika di Universitas Internasional Semen Indonesia (UISI). Terus berkembang menjadi Software Developer yang andal dengan menghadirkan solusi digital kreatif, menggabungkan ketangguhan rekayasa perangkat lunak (Software Engineering) dengan keindahan desain UI/UX yang berdampak nyata bagi masyarakat dan industri.</p>
-        </section>
-
-        <section class="section">
-            <h2 class="section-title">02 // Education & Academic Background</h2>
-                            <div class="item">
-                    <div class="item-head">
-                        <span>S1 Informatika (Computer Science / Informatics)</span>
-                        <span class="item-period">2024 — Sekarang (Semester 5)</span>
-                    </div>
-                    <div class="item-sub">Universitas Internasional Semen Indonesia (UISI) • Mahasiswa Aktif Semester 5 • Fokus Software &amp; Web Engineering</div>
-                    <p class="item-desc">Mendalami Rekayasa Perangkat Lunak, Pemrograman Web Berbasis Framework, Struktur Data &amp; Algoritma, Desain Antarmuka (UI/UX), Basis Data Relasional, serta Pengembangan Sistem Informasi Digital.</p>
-                </div>
-                            <div class="item">
-                    <div class="item-head">
-                        <span>Independent Web, Software &amp; UI/UX Exploration Track</span>
-                        <span class="item-period">2024 — 2026</span>
-                    </div>
-                    <div class="item-sub">Dicoding Academy, Coursera &amp; Campus Tech Bootcamps • Eksplorasi Aktif Full-Stack Web &amp; Modern Interface Design</div>
-                    <p class="item-desc">Memperkuat keahlian praktis dalam pengembangan aplikasi web berbasis Laravel, React, TypeScript, Tailwind CSS, serta perancangan sistem desain menggunakan Figma.</p>
-                </div>
-                    </section>
-
-        <section class="section">
-            <h2 class="section-title">03 // Selected Engineering Projects</h2>
-                            <div class="item">
-                    <div class="item-head">
-                        <span>SIMAK-UISI — Academic &amp; Student Activity Portal (Full-Stack)</span>
-                        <span class="item-period">2026</span>
-                    </div>
-                    <p class="item-desc">Platform web terintegrasi untuk manajemen kegiatan akademik, jadwal perkuliahan, portofolio tugas, serta kolaborasi proyek mahasiswa Informatika dengan dashboard interaktif yang modern.</p>
-                    <div class="tag-list">
-                                                    <span class="tag">Laravel 12</span>
-                                                    <span class="tag">Blade</span>
-                                                    <span class="tag">Tailwind CSS</span>
-                                                    <span class="tag">JavaScript</span>
-                                                    <span class="tag">MySQL</span>
-                                            </div>
-                </div>
-                            <div class="item">
-                    <div class="item-head">
-                        <span>NovaUI — Minimalist Web Component &amp; Design System (Design System)</span>
-                        <span class="item-period">2026</span>
-                    </div>
-                    <p class="item-desc">Koleksi komponen UI/UX modern bergaya editorial minimalis yang dirancang di Figma dan diimplementasikan ke dalam kode menggunakan Tailwind CSS serta TypeScript untuk mempercepat pengembangan web.</p>
-                    <div class="tag-list">
-                                                    <span class="tag">React.js</span>
-                                                    <span class="tag">TypeScript</span>
-                                                    <span class="tag">Tailwind CSS</span>
-                                                    <span class="tag">Figma</span>
-                                                    <span class="tag">Lucide Icons</span>
-                                            </div>
-                </div>
-                            <div class="item">
-                    <div class="item-head">
-                        <span>TaskFlow Studio — Collaborative Project &amp; Sprint Tracker (Web App)</span>
-                        <span class="item-period">2025</span>
-                    </div>
-                    <p class="item-desc">Aplikasi web manajemen tugas tim dan organisasi kampus dengan fitur papan Kanban interaktif, penanda prioritas tugas, tenggat waktu proyek, serta analitik produktivitas mingguan.</p>
-                    <div class="tag-list">
-                                                    <span class="tag">Laravel</span>
-                                                    <span class="tag">Tailwind CSS</span>
-                                                    <span class="tag">Alpine.js</span>
-                                                    <span class="tag">MySQL</span>
-                                                    <span class="tag">REST API</span>
-                                            </div>
-                </div>
-                            <div class="item">
-                    <div class="item-head">
-                        <span>KaryaDigital — Creative Showcase &amp; Innovation Hub (Frontend UI)</span>
-                        <span class="item-period">2025</span>
-                    </div>
-                    <p class="item-desc">Platform galeri digital untuk menampilkan karya inovasi teknologi, proyek perangkat lunak, dan studi kasus desain UI/UX mahasiswa dengan tata letak editorial modern.</p>
-                    <div class="tag-list">
-                                                    <span class="tag">HTML5</span>
-                                                    <span class="tag">CSS3</span>
-                                                    <span class="tag">JavaScript ES6+</span>
-                                                    <span class="tag">Tailwind CSS</span>
-                                                    <span class="tag">Vite</span>
-                                            </div>
-                </div>
-                    </section>
-
-        <section class="section">
-            <h2 class="section-title">04 // Leadership & Organizations</h2>
-                            <div class="item">
-                    <div class="item-head">
-                        <span>Active Member &amp; Software Division — Himpunan Mahasiswa Informatika (HMIF) — UISI</span>
-                        <span class="item-period">2024 — Sekarang</span>
-                    </div>
-                    <p class="item-desc">Berpartisipasi aktif dalam kegiatan pengembangan keilmuan mahasiswa Informatika UISI, kolaborasi proyek teknologi kampus, serta penyelenggaraan seminar dan workshop pemrograman.</p>
-                </div>
-                            <div class="item">
-                    <div class="item-head">
-                        <span>Web &amp; Digital Media Contributor — UISI Tech &amp; Digital Innovation Community</span>
-                        <span class="item-period">2025 — Sekarang</span>
-                    </div>
-                    <p class="item-desc">Berdiskusi dan berkolaborasi bersama rekan mahasiswa dalam eksplorasi Web Development, UI/UX Design Challenge, serta pengembangan solusi digital kreatif.</p>
-                </div>
-                            <div class="item">
-                    <div class="item-head">
-                        <span>Technical &amp; Creative Committee — Informatics Annual Tech Event &amp; Exhibition — UISI</span>
-                        <span class="item-period">2025 — 2026</span>
-                    </div>
-                    <p class="item-desc">Terlibat dalam pengelolaan sistem informasi acara, publikasi digital, dan pameran karya inovasi mahasiswa Program Studi Informatika.</p>
-                </div>
-                    </section>
-
-        <section class="section">
-            <h2 class="section-title">05 // Technical Stack & Credentials</h2>
-            <div class="grid-2">
-                <div>
-                    <strong style="font-size: 0.85rem;">Core Technologies</strong>
-                    <div class="tag-list" style="margin-top: 0.5rem;">
-                                                                                    <span class="tag">HTML5 &amp; CSS3</span>
-                                                            <span class="tag">JavaScript (ES6+)</span>
-                                                            <span class="tag">Tailwind CSS</span>
-                                                            <span class="tag">Bootstrap 5</span>
-                                                            <span class="tag">React.js</span>
-                                                            <span class="tag">TypeScript</span>
-                                                                                                                <span class="tag">Laravel</span>
-                                                            <span class="tag">PHP 8+</span>
-                                                            <span class="tag">Blade Template</span>
-                                                            <span class="tag">RESTful API</span>
-                                                            <span class="tag">Node.js</span>
-                                                                                                                <span class="tag">MySQL</span>
-                                                            <span class="tag">SQLite</span>
-                                                            <span class="tag">PostgreSQL</span>
-                                                                                                                <span class="tag">Git &amp; GitHub</span>
-                                                            <span class="tag">VS Code</span>
-                                                            <span class="tag">Postman</span>
-                                                            <span class="tag">Vite &amp; Composer</span>
-                                                            <span class="tag">Laragon / XAMPP</span>
-                                                                                                                <span class="tag">Figma</span>
-                                                            <span class="tag">Canva Pro</span>
-                                                            <span class="tag">Framer</span>
-                                                                        </div>
-                </div>
-                <div>
-                    <strong style="font-size: 0.85rem;">Verified Certifications</strong>
-                    <ul style="font-size: 0.84rem; color: #3F3F46; margin-top: 0.5rem; padding-left: 1.1rem;">
-                                                    <li style="margin-bottom: 0.25rem;"><strong>Belajar Dasar Pemrograman Web &amp; Front-End Modern</strong> — Dicoding Indonesia (2026)</li>
-                                                    <li style="margin-bottom: 0.25rem;"><strong>Full-Stack Web Development with Laravel Framework</strong> — BuildWithAngga / Tech Bootcamp (2025)</li>
-                                                    <li style="margin-bottom: 0.25rem;"><strong>Foundations of User Experience (UX) &amp; UI Design</strong> — Google / Coursera Career Certificate (2025)</li>
-                                                    <li style="margin-bottom: 0.25rem;"><strong>Belajar Pemrograman JavaScript &amp; Aplikasi Interaktif</strong> — Dicoding Indonesia (2025)</li>
-                                                    <li style="margin-bottom: 0.25rem;"><strong>Database Design &amp; SQL Programming Foundations</strong> — Oracle Academy / University Track (2025)</li>
-                                                    <li style="margin-bottom: 0.25rem;"><strong>Software Engineering &amp; Digital Innovation Seminar</strong> — Informatika UISI &amp; Industry Partners (2024)</li>
-                                            </ul>
-                </div>
-            </div>
-        </section>
+    <main class="cv-sheet">
+        <img src="/images/cv-bagus-setyo-nugroho.jpg" alt="Curriculum Vitae — Bagus Setyo Nugroho">
     </main>
 </body>
 </html>

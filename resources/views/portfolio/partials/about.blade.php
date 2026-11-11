@@ -20,7 +20,7 @@
 
                 <!-- Description Paragraph -->
                 <p class="text-xs sm:text-[13.5px] leading-[1.9] text-zinc-400 max-w-[540px]">
-                    Mahasiswa S1 Informatika Universitas Internasional Semen Indonesia (UISI) dengan passion di bidang frontend development dan UI modern. Berfokus pada pembuatan website clean, responsif, dan visual yang kuat untuk menghadirkan pengalaman digital yang optimal.
+                    Halo semuanya, saya Bagus Setyo Nugroho, biasa dipanggil Bagus. Saya mahasiswa Informatika UISI yang antusias mendalami dunia frontend development dan UI design. Fokus saya adalah mengubah ide atau konsep visual menjadi antarmuka web interaktif yang responsif, nyaman digunakan, dan berkarakter kuat. Senang bisa berkenalan!
                 </p>
 
                 <!-- Italic Quote Pill Box -->

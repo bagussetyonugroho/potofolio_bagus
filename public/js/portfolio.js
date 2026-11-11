@@ -9,26 +9,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ======================================================================
-       1. PAGE LOADING PRELOADER
+       1. PAGE LOADING PRELOADER (WELCOME SPLASH SCREEN)
        ====================================================================== */
     const preloader = document.getElementById('page-preloader');
-    const preloaderCount = document.getElementById('preloader-count');
-    const preloaderBar = document.getElementById('preloader-bar');
+    const preloaderUrlText = document.getElementById('preloader-url-text');
 
     if (preloader) {
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += Math.floor(Math.random() * 18) + 12;
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
-                setTimeout(() => {
-                    preloader.classList.add('loaded');
-                }, 180);
-            }
-            if (preloaderCount) preloaderCount.textContent = String(progress).padStart(2, '0') + '%';
-            if (preloaderBar) preloaderBar.style.width = progress + '%';
-        }, 55);
+        if (preloaderUrlText) {
+            const fullUrl = preloaderUrlText.textContent.trim() || 'stybagus.devs.surf';
+            preloaderUrlText.textContent = '';
+            setTimeout(() => {
+                let idx = 0;
+                const typeTimer = setInterval(() => {
+                    idx++;
+                    preloaderUrlText.textContent = fullUrl.slice(0, idx);
+                    if (idx >= fullUrl.length) {
+                        clearInterval(typeTimer);
+                    }
+                }, 42);
+            }, 1050);
+        }
+
+        setTimeout(() => {
+            preloader.classList.add('loaded');
+        }, 2450);
     }
 
     /* ======================================================================
