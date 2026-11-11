@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const rootDir = process.cwd();
 const publicDir = path.join(rootDir, 'public');
@@ -18,7 +19,6 @@ function normalizeHtmlForSnapshot(html) {
   if (viteBlockRegex.test(out)) {
     out = out.replace(viteBlockRegex, '<!-- VITE_ASSETS_PLACEHOLDER -->');
   } else {
-    // Fallback replacement if only script/link exist
     out = out.replace(/<link[^>]+href="\/build\/assets\/[^"]+"[^>]*>/g, '');
     out = out.replace(/<script[^>]+src="\/build\/assets\/[^"]+"[^>]*><\/script>/g, '<!-- VITE_ASSETS_PLACEHOLDER -->');
   }
@@ -27,6 +27,14 @@ function normalizeHtmlForSnapshot(html) {
 }
 
 function tryUpdateSnapshotsFromPhp() {
+  if (
+    !fs.existsSync(path.join(rootDir, 'vendor', 'autoload.php')) ||
+    !fs.existsSync(path.join(rootDir, '.env'))
+  ) {
+    console.log('[vercel-build] Vendor or .env not present in build environment; using committed HTML snapshots.');
+    return;
+  }
+
   try {
     execFileSync('php', ['-v'], { stdio: 'ignore' });
   } catch {
@@ -111,7 +119,7 @@ function copyDirRecursive(src, dest) {
   }
 }
 
-function buildStaticDist() {
+export function buildStaticDist() {
   tryUpdateSnapshotsFromPhp();
 
   const viteTags = buildViteAssetTags();
@@ -157,4 +165,6 @@ function buildStaticDist() {
   console.log('[vercel-build] Successfully generated static output in dist/');
 }
 
-buildStaticDist();
+if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url))) {
+  buildStaticDist();
+}
