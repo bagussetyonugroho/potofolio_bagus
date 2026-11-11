@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Lanyard from './Lanyard';
 
 /**
- * Generates the original monochrome studio Front 3D ID Card image
- * using bagus-hero.jpg inside the clean white card frame.
+ * Generates the monochrome studio Front 3D ID Card image
+ * using /images/bagus-hero.jpg inside the clean white card frame.
  */
-async function generateFrontCardImage(profile) {
+async function generateFrontCardImage() {
   const width = 1024;
   const height = 1440;
   const canvas = document.createElement('canvas');
@@ -28,7 +28,6 @@ async function generateFrontCardImage(profile) {
   const frameH = height - 128;
   const radius = 26;
 
-  // Always load the original hero portrait (/images/bagus-hero.jpg)
   const img = await new Promise(resolve => {
     const image = new Image();
     image.crossOrigin = 'anonymous';
@@ -59,7 +58,7 @@ async function generateFrontCardImage(profile) {
     ctx.restore();
   }
 
-  // Subtle studio vignette around edges & bottom (like original screenshot)
+  // Subtle studio vignette around edges & bottom
   const radialVig = ctx.createRadialGradient(
     frameX + frameW * 0.5,
     frameY + frameH * 0.42,
@@ -82,6 +81,99 @@ async function generateFrontCardImage(profile) {
   ctx.restore();
 
   // Subtle crisp inner border around portrait window
+  ctx.strokeStyle = 'rgba(0, 0, 0, 0.18)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.roundRect(frameX, frameY, frameW, frameH, radius);
+  ctx.stroke();
+
+  // 3. Sleek vertical black clip at top center
+  ctx.fillStyle = '#09090b';
+  ctx.beginPath();
+  ctx.roundRect(width / 2 - 12, 8, 24, 78, 6);
+  ctx.fill();
+
+  return canvas.toDataURL('image/png');
+}
+
+/**
+ * Generates the Back 3D ID Card image using /images/bagus-about.jpg
+ * (the INFORMATICS back-view portrait) inside the matching white card frame.
+ */
+async function generateBackCardImage() {
+  const width = 1024;
+  const height = 1440;
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return '/images/bagus-about.jpg';
+
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+
+  // 1. Clean light-gray / off-white outer card body frame
+  ctx.fillStyle = '#e5e5e7';
+  ctx.fillRect(0, 0, width, height);
+
+  // 2. Inner rounded portrait window
+  const frameX = 60;
+  const frameY = 68;
+  const frameW = width - 120;
+  const frameH = height - 128;
+  const radius = 26;
+
+  const img = await new Promise(resolve => {
+    const image = new Image();
+    image.crossOrigin = 'anonymous';
+    image.onload = () => resolve(image);
+    image.onerror = () => resolve(null);
+    image.src = '/images/bagus-about.jpg';
+  });
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.roundRect(frameX, frameY, frameW, frameH, radius);
+  ctx.clip();
+
+  ctx.fillStyle = '#141417';
+  ctx.fillRect(frameX, frameY, frameW, frameH);
+
+  if (img) {
+    // Frame from slightly above the head down to the back so INFORMATICS is centered
+    const sy = img.height * 0.18;
+    const sh = img.height * 0.82;
+    const sw = Math.min(img.width, sh * (frameW / frameH));
+    const sx = (img.width - sw) / 2;
+
+    ctx.save();
+    ctx.filter = 'grayscale(100%) contrast(1.14) brightness(0.95)';
+    ctx.drawImage(img, sx, sy, sw, sh, frameX, frameY, frameW, frameH);
+    ctx.restore();
+  }
+
+  // Subtle studio vignette around edges & bottom
+  const radialVig = ctx.createRadialGradient(
+    frameX + frameW * 0.5,
+    frameY + frameH * 0.45,
+    frameW * 0.25,
+    frameX + frameW * 0.5,
+    frameY + frameH * 0.5,
+    frameW * 0.78
+  );
+  radialVig.addColorStop(0, 'rgba(0, 0, 0, 0)');
+  radialVig.addColorStop(1, 'rgba(0, 0, 0, 0.45)');
+  ctx.fillStyle = radialVig;
+  ctx.fillRect(frameX, frameY, frameW, frameH);
+
+  const bottomGrad = ctx.createLinearGradient(0, frameY + frameH * 0.68, 0, frameY + frameH);
+  bottomGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+  bottomGrad.addColorStop(1, 'rgba(0, 0, 0, 0.72)');
+  ctx.fillStyle = bottomGrad;
+  ctx.fillRect(frameX, frameY, frameW, frameH);
+
+  ctx.restore();
+
   ctx.strokeStyle = 'rgba(0, 0, 0, 0.18)';
   ctx.lineWidth = 2;
   ctx.beginPath();
@@ -125,14 +217,13 @@ function generateStrapImage() {
 }
 
 export default function LanyardShowcase({
-  profile = {},
   frontImage: customFrontImage,
   backImage: customBackImage,
   strapImage: customStrapImage
 }) {
   const [cards, setCards] = useState({
     front: customFrontImage || '/images/bagus-hero.jpg',
-    back: customBackImage || '/images/bagus-hero.jpg',
+    back: customBackImage || '/images/bagus-about.jpg',
     strap: customStrapImage || undefined
   });
 
@@ -140,14 +231,15 @@ export default function LanyardShowcase({
     let active = true;
     (async () => {
       try {
-        const [frontUrl, strapUrl] = await Promise.all([
-          customFrontImage ? Promise.resolve(customFrontImage) : generateFrontCardImage(profile),
+        const [frontUrl, backUrl, strapUrl] = await Promise.all([
+          customFrontImage ? Promise.resolve(customFrontImage) : generateFrontCardImage(),
+          customBackImage ? Promise.resolve(customBackImage) : generateBackCardImage(),
           customStrapImage ? Promise.resolve(customStrapImage) : Promise.resolve(generateStrapImage())
         ]);
         if (active) {
           setCards({
             front: frontUrl || '/images/bagus-hero.jpg',
-            back: customBackImage || frontUrl || '/images/bagus-hero.jpg',
+            back: backUrl || '/images/bagus-about.jpg',
             strap: strapUrl || undefined
           });
         }
@@ -158,7 +250,7 @@ export default function LanyardShowcase({
     return () => {
       active = false;
     };
-  }, [profile.name, customFrontImage, customBackImage, customStrapImage]);
+  }, [customFrontImage, customBackImage, customStrapImage]);
 
   return (
     <div className="relative w-full h-full">
